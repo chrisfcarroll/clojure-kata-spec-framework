@@ -1,14 +1,10 @@
 # testfwk
 
-A Clojure library designed to ... well, that part is up to you.
+An effort at the clojure-spec-framework kata: Write a framework for TDD.
 
 ## Usage
 
-FIXME
 
 ## License
-
-Copyright © 2014 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Public domain.
+<a href="http://cafe-encounter.net/" rel="dct:creator"><span property="dct:title">Chris F Carroll</span></a>
