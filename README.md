@@ -8,7 +8,7 @@ For clojure I started with:
 
 (spec "A Spec describes expected behaviour")    
 
-which (until my computer can read english and clojure) I confirm by manual inspection: The spec does indeed describe it's expected behaviour).
+which (until my computer can read english and clojure) I confirm by manual inspection: The spec does indeed describe its expected behaviour).
 
 So I went straight on to
 
