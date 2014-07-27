@@ -14,7 +14,7 @@ So I went straight on to
 
 (spec "A Spec runs its body") 
 
-which took me about a day to do. But I learned some stuff about vim, fireplace, paredit, and clojure macros along the way.
+which took me about a day. But I learned some stuff about vim, fireplace, paredit, and clojure macros along the way.
 
 
 ## License
