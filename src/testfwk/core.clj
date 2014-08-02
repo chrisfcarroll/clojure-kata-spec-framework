@@ -1,9 +1,40 @@
 (ns testfwk.core)
 
+(def results (atom {}))
+
+(defn start-run [] (swap! results (fn [a] {})))
+
 (defmacro spec
-  "Execute a specification and reports failure"
+  "Execute a specification and resultss failure"
   [name & more]
-  (cons 'do more))
+  `(let [result#  (if ~(empty? more) 
+                    :manual  
+                    (try 
+                      ~(cons 'do more)
+                      :pass 
+                      (catch AssertionError e# (.getMessage e#))))]
+        (swap! results assoc ~name result#)
+        result#
+    ))
+
+(defn report-to-console [] 
+  (let [fails (filter 
+                #(and 
+                   (instance? String (val %)) 
+                   (not= (key %) "Spec with a failing body")
+                )  
+                @results
+              )
+        passes (count (filter #(= :pass (val %)) @results))
+        manuals (count (filter #(= :manual (val %)) @results)) 
+        summary {:passes passes :manuals manuals :fails (count fails)}
+        ]
+    (println summary)
+    (if (not (empty? fails))
+      (println "Fails were:" fails)
+      )
+  ))
+
 
 (ns testfwk.core.bootstrap (:require [testfwk.core :refer :all]))
  
@@ -13,5 +44,9 @@
        true))
   (if (eval bootstrap-assertion)
     (println "Bootstrapped OK.")
-    (throw (AssertionError. "Bootstrap assertion failed. Don't believe anything I claim has passed.")))
- 
+    (throw 
+      (AssertionError. 
+       "Bootstrap assertion failed. Don't believe anything I claim has passed.")))
+
+
+(start-run)
